@@ -118,4 +118,21 @@ VALUES
     ('9789177953685', 'Gentlemen', 'Swedish', 165, '2020-08-27', 6, 7),
     ('9780099591115', 'Filth', 'English', 107, '1999-08-01', 7, 8)
 
+SELECT * FROM Stores
 
+INSERT INTO Stores
+VALUES ('Store','Karlsborgsvägen.20','Oskarshamn',57260,'Sweden'),
+       ('BookStore','SitusGatan.123','Lammarhamn',25260,'Sweden'),
+       ('ReadNGo','Svennshög.64','Arlöv',19302,'Sweden'),
+       ('MangaNerd','GravstenVägen.03','Lund',34402,'Sweden'),
+       ('OwlsNest','Randstadsvägen.22','Upsala',78202,'Sweden')
+
+
+INSERT INTO  Instock (StoreID, ISBN13, Amount) 
+values (1,9789137154831,10),
+       (2,9789100164218,15),
+       (3,9789178870417,20),
+       (4,9789100185596,24),
+       (5,9781865081816,30)
+
+SELECT * FROM InStock
