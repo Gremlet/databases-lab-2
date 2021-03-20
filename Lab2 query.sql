@@ -120,7 +120,7 @@ VALUES
 (7, 'Bokförlaget Polaris', 'Ludvigsbergsgatan 20', 'Stockholm', '11823', 'Sweden'),
 (8, 'Vintage', '80 Strand', 'London', 'WC2R0RL', 'United Kingdom')
 
-select * from Books 
+SELECT * FROM Books 
 
 INSERT INTO Books
 VALUES ('9789137154831', 'Där kräftorna sjunger', 'Swedish', 79, '2020-04-29', 1, 1)
@@ -136,3 +136,5 @@ VALUES
     ('9789177953692', 'Gangsters', 'Swedish', 165, '2020-08-27', 6, 7),
     ('9789177953685', 'Gentlemen', 'Swedish', 165, '2020-08-27', 6, 7),
     ('9780099591115', 'Filth', 'English', 107, '1999-08-01', 7, 8)
+
+
