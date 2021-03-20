@@ -80,32 +80,13 @@ CREATE TABLE InStock (
 SELECT * from Authors
 
 INSERT INTO Authors
-VALUES (
-'Lars',
-'Kepler',
-'1966-03-02'),
-(
-'Jennie',
-'Waldén',
-'1976-03-04'),
-(
-'Jo',
-'Nesbø',
-'1960-03-29'),
-(
-'Henning',
-'Mankell',
-'1948-02-03'),
-(
-'Klas',
-'Östergren',
-'1955-02-20'),
-(
-'Irvine',
-'Welsh',
-'1958-09-27')
-
-
+VALUES 
+('Lars', 'Kepler', '1966-03-02'),
+('Jennie', 'Waldén', '1976-03-04'),
+('Jo', 'Nesbø', '1960-03-29'),
+('Henning', 'Mankell', '1948-02-03'),
+('Klas', 'Östergren', '1955-02-20'),
+('Irvine', 'Welsh', '1958-09-27')
 
 SELECT * from Publishers
 
