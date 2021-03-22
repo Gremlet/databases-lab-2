@@ -136,3 +136,132 @@ values (1,9789137154831,10),
        (5,9781865081816,30)
 
 SELECT * FROM InStock
+
+INSERT INTO InStock
+VALUES 
+    (1, 9789515805195, 25),
+    (3, 9788466329781, 31),
+    (4, 9789177953692, 21),
+    (1, 9789177953685, 19),
+    (2, 9780099591115, 22)
+
+SELECT * from BookOrder
+
+INSERT INTO BookOrder
+VALUES
+    (1, 9789100185596, 1 ),
+    (2, 9789177953692, 1 )
+
+INSERT INTO Customers
+            VALUES (1,'James','Butterburg', 'james@gmail.com', 'Blue Gum Street', 'New York', '70116','United States of America'),
+                   (2,'Josephine', 'Darakjy', 'josephine@hotmail.com','Ridge Blvd', 'Brighton', '48116','United Kingdom'),
+                   (3,'Arthur','Chemel','arthur@gmail.com','Jalan Bisma', 'Ubud','08014','Indonesia')
+
+SELECT * from Customers
+
+SELECT * from Basket
+
+INSERT INTO Basket (CustomerID)
+VALUES (1), (2), (3)
+
+GO
+
+-- View
+CREATE VIEW [Titles per author] AS 
+SELECT 
+    CONCAT(FirstName, ' ', LastName) as [Name],
+    DATEDIFF(Year, Birthday, GETDATE()) as Age,
+    COUNT(Books.Title) as Titles,
+    FORMAT(SUM(InStock.Amount * Books.Price), 'C', 'sv-se' ) as [Stock value]
+    
+from Authors
+INNER JOIN Books ON Authors.ID = Books.AuthorID
+INNER JOIN InStock ON InStock.ISBN13 = Books.ISBN13
+GROUP BY FirstName, LastName, Birthday
+
+GO
+
+Select * from [Titles per author]
+
+CREATE TABLE BookAuthor (
+    ISBN13 NVARCHAR(255) FOREIGN KEY (ISBN13) REFERENCES Books(ISBN13),
+    AuthorID INT FOREIGN KEY (AuthorID) REFERENCES Authors(ID)
+)
+
+SELECT * from BookAuthor
+
+INSERT INTO BookAuthor
+VALUES
+    ('9780099591115', 7),
+    ('9781865081816', 5),
+    ('9788466329781', 4),
+    ('9789100164218', 2),
+    ('9789100185596', 4),
+    ('9789137154831', 1),
+    ('9789177953685', 6),
+    ('9789177953692', 6),
+    ('9789178870417', 3),
+    ('9789515805195', 5)
+
+SELECT Books.Title, CONCAT(Authors.FirstName, ' ', Authors.LastName) as [Author name]
+FROM Books
+INNER JOIN BookAuthor ON Books.ISBN13 = BookAuthor.ISBN13
+INNER JOIN Authors ON BookAuthor.AuthorID = Authors.ID
+
+-- Removed AuthorID from Books table so a book can have more than one author
+
+ALTER TABLE Books
+DROP CONSTRAINT FK__Books__AuthorID__286302EC
+
+ALTER TABLE Books
+DROP COLUMN AuthorID 
+
+SELECT * from Books
+
+INSERT INTO Authors
+VALUES ('Ebba', 'Kleberg von Sydow', '1976-6-12'), ('Emilia', 'de Poiret', '1965-5-3')
+
+INSERT INTO Books
+VALUES
+    ('9789178870431', 'Säker stil - Utmana din garderob', 'Swedish', 199, '2021-02-18', 3 )
+
+INSERT INTO BookAuthor
+VALUES ('9789178870431', 8), ('9789178870431', 9)
+
+SELECT * from Authors
+
+
+select * from Basket
+SELECT * from BookOrder
+SELECT * from Customers
+
+GO
+
+CREATE VIEW [Order records] AS
+
+SELECT 
+    CONCAT(FirstName, ' ', Lastname) as [Customer name],
+    Books.Title,
+    BookOrder.Amount,
+    FORMAT(SUM(BookOrder.Amount * Books.Price), 'C', 'sv-se') as Total
+
+    
+FROM Customers
+INNER JOIN Basket ON Customers.ID = Basket.CustomerID
+INNER JOIN BookOrder ON Basket.ID = BookOrder.BasketID
+INNER JOIN Books ON Books.ISBN13 = BookOrder.ISBN13
+GROUP BY FirstName, Lastname, Title, Amount
+
+-- It is important for the store to know which customers have ordered which books, both for record-keeping and making sure the right books go to the right customer.
+
+GO
+
+SELECT * FROM [Order records]
+
+
+
+
+
+
+
+
