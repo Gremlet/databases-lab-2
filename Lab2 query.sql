@@ -1,3 +1,5 @@
+CREATE DATABASE Bookstore
+
 CREATE TABLE Authors (
     ID INT PRIMARY KEY IDENTITY(1,1),
     FirstName NVARCHAR(50),
